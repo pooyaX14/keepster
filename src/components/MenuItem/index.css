@@ -1,0 +1,25 @@
+.menu-item {
+    width:100%;
+    display: flex;
+    flex-flow: wrap;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-between;
+    cursor: pointer;
+}
+
+.menu-item.selected {
+    background-color: #C09ACD;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.menu-item > div {
+    width: 3em;
+}
+
+.menu-item > h2 {
+    width: 3em;
+    min-width: 100px;
+}

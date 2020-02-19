@@ -1,0 +1,44 @@
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 1em;
+    color: #3E3B3F;
+
+    border-color: #C8C0CA;
+    border-style: solid;
+    word-break: break-word;
+    padding: 0.5em;
+}
+
+.grid-item > :nth-child(1) {flex-grow: 1;}
+.grid-item > :nth-child(2) {
+    flex-grow: 3;
+    height: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.grid-item > :nth-child(3) {
+    flex-grow: 1;
+    height: 20%;
+}
+
+.grid-item.short {
+    grid-row: span 2;
+    flex-basis: 20px;
+}
+
+.grid-item.tall {
+    grid-row: span 3;
+}
+
+.grid-item.taller {
+    grid-row: span 4;
+}
+
+.grid-item.tallest {
+    grid-row: span 5;
+}
+  

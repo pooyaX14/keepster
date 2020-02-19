@@ -1,0 +1,11 @@
+.add_note_button {
+  display: flex;
+  flex-direction: row-reverse;
+  color: rgba(0, 0, 0, 0.87);
+  cursor: pointer;
+  font-family: "Roboto", arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;  
+  padding: 5px 14px;
+  text-transform: uppercase;
+}

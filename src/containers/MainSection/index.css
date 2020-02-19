@@ -1,0 +1,12 @@
+.main-section {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+    
+    color: #3E3B3F;
+}
+
+.main-section > div {
+    margin-top: 2em;
+}

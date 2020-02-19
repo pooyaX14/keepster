@@ -1,0 +1,22 @@
+.search {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: space-between;
+  }
+
+.search input[type="text"] {
+	padding: 10px;
+	position: relative;
+	border: solid 1px #dcdcdc;
+	transition: box-shadow 0.3s, border 0.3s;
+	border-radius: 4px;
+	width: 80%;
+	color: #3E3B3F
+}
+.search input[type="text"]:focus, .search input[type="text"].focus
+{
+  	border: solid 1px #707070;
+  	box-shadow: 0 0 5px 1px white;
+}

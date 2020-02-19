@@ -1,0 +1,16 @@
+.notes-grid {
+    padding: 2em;
+}
+
+.notes-grid > h3 {
+    text-align: center;
+}
+
+grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    grid-auto-rows: 50px;
+    grid-gap: 2em;
+    white-space: pre-line;
+    text-overflow: ellipsis;
+}

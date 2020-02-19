@@ -1,0 +1,40 @@
+/*
+    Using CSS Grid
+*/
+/* .layout {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+
+    border-top: #3E3B3F;
+    border-top-style: solid;
+} */
+
+/*
+    Using Flexbox
+*/
+.layout {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: center;
+    color: #3E3B3F;
+}
+  
+.layout > :nth-child(1) {
+    flex-grow: 5;
+    opacity: 1;
+    transition: flex-grow 0.5s cubic-bezier(.17,.67,.83,.67), opacity 0.5s;
+}
+.layout > :nth-child(2) {
+    flex-grow: 10;
+}
+
+.layout.hide-menu > :nth-child(1) {
+    flex-grow: 0;
+    opacity: 0;
+    transition: flex-grow 0.5 cubic-bezier(.17,.67,.83,.67), opacity 0.5s;
+}  
