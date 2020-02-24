@@ -1,8 +1,8 @@
 .grid-item {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: flex-start; */
     font-size: 1em;
     color: #3E3B3F;
 
@@ -11,6 +11,18 @@
     word-break: break-word;
     padding: 0.5em;
 }
+
+.note-card-heading__container {
+    display: flex;
+}
+
+.pin_note {
+    margin-left: auto;
+    opacity: 0;
+}
+.grid-item.show_tools .pin_note {
+    opacity: 1;
+} 
 
 .grid-item > :nth-child(1) {flex-grow: 1;}
 .grid-item > :nth-child(2) {
