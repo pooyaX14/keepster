@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { withRouter, RouteComponentProps, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './index.css';

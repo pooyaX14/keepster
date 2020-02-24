@@ -2,14 +2,18 @@ import React from 'react';
 
 import Header from './containers/Header'
 import Layout from './containers/Layout'
+import EditModalBox from './containers/EditModalBox'
+import Overlay from './containers/EditModalBox/Overlay';
+
 
 function App() {
   return (
-    <>
-      <Header />
-
-      <Layout />
-    </>
+    <div className="app">
+        <Header />
+        <Layout />
+        <Overlay />
+        <EditModalBox />
+    </div>
   );
 }
 

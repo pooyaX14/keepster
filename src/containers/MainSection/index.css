@@ -1,9 +1,9 @@
-.main-section {
+.main-section-width {
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: flex-start;
-    
+    width: 60%;
     color: #3E3B3F;
 }
 

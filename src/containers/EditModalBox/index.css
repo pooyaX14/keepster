@@ -1,0 +1,50 @@
+ .editPortal {
+    /* background-color: rgba(229,229,229, 0); */
+    position: fixed;
+    background: rgba(0, 0, 0, 0.7);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* display: none; */
+    /* z-index: 2; */
+    transition: all 1s ease;
+}
+
+.editPortal.editPortal--visible {
+    background-color: rgba(229,229,229, 0.75);
+    display: block;
+    /* z-index: 4000; */
+    /* display: grid;
+    align-items: center;
+    justify-items: center; */
+} 
+
+/* .editPortal .note-card { 
+    position: fixed;
+    transition: all 0.20s ease;
+    width: 240px;
+} */
+
+.edit-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.20s ease;
+}
+
+/* .editPortal--visible .note-card__container {
+    opacity: 1 !important;
+}
+
+.editPortal--visible .note-card__container .note-card__textbox {
+    max-height: 600px;
+}
+
+
+
+.editPortal .note-card__container {
+    transition: all 0.20s ease;
+}
+   */

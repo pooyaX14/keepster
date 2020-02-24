@@ -1,13 +1,14 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import rootReducer from './mainReducer'
 
-import {sidebarInitialState, noteInitialState} from './reducers';
+import {sidebarInitialState, noteInitialState, editModalInitialState } from './reducers';
 import thunk from 'redux-thunk';
 
 export function configureDefaultState() {
     const defaultKeepsterState = {
         sidebar_state: sidebarInitialState,
-        notes_state: noteInitialState
+        notes_state: noteInitialState,
+        edit_modal_state: editModalInitialState,
     }
 
     return defaultKeepsterState;

@@ -6,8 +6,8 @@ import './index.css';
 
 import MenuItem from '../../components/MenuItem'
 
-import { FaArchive } from 'react-icons/fa';
-import { FaRegStickyNote } from 'react-icons/fa';
+import { FaArchive, FaRegStickyNote } from 'react-icons/fa';
+import { TiPinOutline } from 'react-icons/ti';
 
 function Sidebar(props) {
   const selectSection = (sectionName) => () => {
@@ -35,6 +35,16 @@ function Sidebar(props) {
           <FaRegStickyNote size="30"/>
           <div>
             <h4> Notes </h4>
+          </div>
+          
+        </MenuItem>
+        <MenuItem
+          selected={props.displaySection === "Pinned Notes"}
+          onSelect={selectSection("Pinned Notes")}
+        >
+          <TiPinOutline size="30"/>
+          <div>
+            <h4> Pinned Notes </h4>
           </div>
           
         </MenuItem>

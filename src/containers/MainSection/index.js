@@ -1,35 +1,18 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { saveNote, getNotes } from '../../store/actions.js'
+import React from 'react';
 import './index.css';
 
 import CreateNote from '../CreateNote';
 import Display from '../../containers/Display';
 
-class MainSection extends React.Component {
 
-   componentDidMount() {
-        this.props.getNotes()
-    } 
-   
-    render() {
-        return (
-            <div className="main-section">
-                <CreateNote saveNote={this.props.saveNote}/>
-                <Display notes={this.props.notes_state}/>
-            </div>
-        );
-    }
-}
+// const EditContext = React.createContext(null);
 
-function mapStateToProps(state) {
-    return {
-        notes_state: state.notes_state,
-    };
+export default function MainSection() {
+
+    return (
+        <div className="main-section-width">
+            <CreateNote/>
+            <Display />
+        </div>
+    );
 }
-  
-  
-export default connect(mapStateToProps, {
-    saveNote: saveNote,
-    getNotes: getNotes
-})(MainSection);

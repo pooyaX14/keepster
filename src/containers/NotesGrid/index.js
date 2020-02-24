@@ -1,39 +1,44 @@
 import React from 'react';
 import './index.css';
-
 import Note from '../../components/Note';
 
+function generateSizeDefinitions({
+    tall, taller, tallest
+}) {
+    return {
+        tall: tall || 35,
+        taller: taller || 70,
+        tallest: tallest || 100
+    }
+}
+
+function getNoteSize(textLength, sizeDefinitions) {
+    let size = "short";
+    if (textLength >= sizeDefinitions.tall && textLength < sizeDefinitions.taller) {
+        size = "tall";
+    } else if (textLength >= sizeDefinitions.taller && textLength < sizeDefinitions.tallest) {
+        size = "taller";
+    } else if (textLength >= sizeDefinitions.tallest) {
+        size = "tallest";
+    }
+    return size;
+}
+
 function NotesGrid(props) {
-    console.log("props.notes", props.notes)
-   const note_grid = props.notes.map((note, index) => {
-       if(note.isPinned) {
-            return (
-               <Note key={note.id} size="short" title={note.title}>{note.note}</Note>
-            )
-       } else {
-           if(note.note.length < 35) {
-              
-                return (
-                    <Note key={note.id} size="short" title={note.title}>{note.note}</Note>  
-                ) 
-           } else if(note.note.length > 35 && note.note.length < 70 ) {
-           
-                return (
-                    <Note key={note.id} size="tall" title={note.title}>{note.note}</Note>  
-                ) 
-           } else if(note.note.length > 70 && note.note.length < 100 ) {
-           
-                return (
-                    <Note key={note.id} size="taller" title={note.title}>{note.note}</Note>  
-                ) 
-            } else if(note.note.length > 100 ) {
-              
-                return (
-                    <Note key={note.id} size="tallest" title={note.title}>{note.note}</Note>  
-                )  
-            }               
-       }     
-    })
+   const sizeDefinitions = generateSizeDefinitions(props.sizeDefinitions || {}); 
+
+    const note_grid = props.notes.map((note, index) => {
+        const size = getNoteSize(note.description.length, sizeDefinitions);
+        return (
+            <Note
+                key={note.id}
+                size={size}
+                note={note}            
+                onClick={props.onNoteClick}
+            />
+        )
+    });
+
     return (
         <div className="notes-grid">
             <h3>{props.title}</h3>
@@ -44,9 +49,38 @@ function NotesGrid(props) {
     )
 }
 
+
+
 export default NotesGrid;
+
+// p {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     font-size: 50px;
+//     /* color: white; */
+//     transform: translate(-50%,-50%);
+// }
 /* 
-<div className="notes-grid">
+
+
+// .grid-item {
+//   position: fixed; /* Sit on top of the page content */
+//   display: none; /* Hidden by default */
+//   width: 100%; /* Full width (cover the whole page) */
+//   height: 100%; /* Full height (cover the whole page) */
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+//   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+//   cursor: pointer; /* Add a pointer on hover */
+// }
+
+
+
+/* <div className="notes-grid">
       <h3>{props.title}</h3>
       <grid-container>
         <Note size="short" title ="Shopping List">
@@ -66,4 +100,4 @@ eichmann in jerusalem
         <Note size="short" title ="Flash episodes"/>
       </grid-container>
 
-    </div> */
+</div> */
