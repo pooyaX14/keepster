@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './index.css';
 
 import NotesGrid from '../../containers/NotesGrid';
-import { getPinnedNotes, getNotes, openEditModal } from '../../store/actions';
+import { getPinnedNotes, getNotes, openEditModal, pinNote, unpinNote } from '../../store/actions';
 
 class Display extends React.Component {
     componentDidMount() {
@@ -12,8 +12,7 @@ class Display extends React.Component {
     }
 
     render() {
-        const { pinnedNotes, notes, openEditModal } = this.props;
-        console.log(this.props);
+        const { pinnedNotes, notes, openEditModal, pinNote, unpinNote} = this.props;
         return (
             <div className="main-section">
             { 
@@ -23,6 +22,8 @@ class Display extends React.Component {
                             title="PINNED"
                             notes={pinnedNotes}
                             onNoteClick={openEditModal}
+                            onPinClick={pinNote}
+                            onUnpinClick={unpinNote}
                             sizeDefinitions = {{
                                 tall: 5,
                                 taller: 60,
@@ -36,6 +37,8 @@ class Display extends React.Component {
                     title="OTHERS"
                     notes={notes}
                     onNoteClick={openEditModal}
+                    onPinClick={pinNote}
+                    onUnpinClick={unpinNote}
                 />
             </div>
         );
@@ -51,6 +54,8 @@ function mapStateToProps(state) {
 }
   
 export default connect(mapStateToProps, {
+    pinNote:pinNote,
+    unpinNote: unpinNote,
     getPinnedNotes: getPinnedNotes,
     getNotes: getNotes,
     openEditModal: openEditModal,

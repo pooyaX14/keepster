@@ -11,10 +11,14 @@ export const DISPLAY_SECTION = 'DISPLAY_SECTION';
 
 export const SAVE_NOTE = 'SAVE_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
+export const REMOVE_NOTE = 'REMOVE_NOTE';
 
 export const GET_PINNED_NOTES= 'GET_PINNED_NOTES';
 export const GET_NOTES= 'GET_NOTES';
 export const CLOSE_NOTE = 'CLOSE_NOTE';
+
+export const PIN_NOTE= 'PIN_NOTE';
+export const UNPIN_NOTE = 'UNPIN_NOTE';
 
 export const OPEN_EDIT_MODAL = 'OPEN_EDIT_MODAL';
 export const CLOSE_EDIT_MODAL = 'CLOSE_EDIT_MODAL';
@@ -48,28 +52,13 @@ export function closeEditModal(note) {
         type: CLOSE_EDIT_MODAL
     }
 }
-// export function saveNote(note) {
-//   const id = shortid();
-//   return {
-//     type: SAVE_NOTE,
-//     payload: {
-//       id: id,
-//       ...note    
-//     }
-    
-//   }
-// }
+
 function success(action, payload) {
     return {
         type: action,
         payload: payload
     }
 }
-
-
-// notesArr = JSON.parse(localStorage.getItem('notesArr')) || [];
-// notesArr.push(note);
-// localStorage.setItem("notesArr", JSON.stringify(notesArr));
 
 export function saveNote(note) {
     return async (dispatch) => {
@@ -141,4 +130,77 @@ export function getPinnedNotes() {
             console.log(err)
         }
     }
+}
+
+async function removeFromNotes(noteToRemove) {
+    const notes = await localforage.getItem('notes') || [];
+
+    const updatedNotes = notes.filter((note) => note.id !== noteToRemove.id);
+
+    return localforage.setItem('notes', updatedNotes);
+}
+
+async function addToPinnedNotes(noteToPin) {
+    const pinnedNotes = await localforage.getItem('pinnedNotes') || [];
+
+    pinnedNotes.unshift({...noteToPin, isPinned: true});
+
+    return localforage.setItem('pinnedNotes', pinnedNotes);
+}
+
+export function pinNote(noteToPin) {
+    return async (dispatch) => {
+        try {
+            Promise.all([
+                removeFromNotes(noteToPin),
+                addToPinnedNotes(noteToPin)
+            ]).then(([notes, pinnedNotes]) =>{
+                dispatch(success(PIN_NOTE, {
+                    notes, pinnedNotes
+                }));
+            })
+        }
+        catch(err) {
+            console.log(err);
+        } 
+    }  
+}
+
+
+
+async function addUnpinNoteToNotes(noteToAdd) {
+    const notes = await localforage.getItem('notes') || [];
+
+    // Add the received note to 'notes' array of localForage
+    notes.unshift({...noteToAdd, isPinned: false});
+    // save to localForage notes array
+    return localforage.setItem('notes', notes);
+}
+
+async function removeFromPinnedNotes(noteToUnpin) {
+
+    let pinnedNotes = await localforage.getItem('pinnedNotes') || [];
+
+    pinnedNotes = pinnedNotes.filter((note) => note.id !== noteToUnpin.id);
+
+    return localforage.setItem('pinnedNotes', pinnedNotes);
+}
+
+export function unpinNote(noteToUnpin) {
+    return async (dispatch) => {
+        try {
+            Promise.all([
+                addUnpinNoteToNotes(noteToUnpin),
+                removeFromPinnedNotes(noteToUnpin)
+            ]).then(([notes, pinnedNotes]) =>{
+                dispatch(success(PIN_NOTE, {
+                    notes, pinnedNotes
+                }));
+            })
+        }
+        catch(err) {
+            console.log(err);
+        } 
+    }
+   
 }

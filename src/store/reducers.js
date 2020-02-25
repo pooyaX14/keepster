@@ -9,6 +9,10 @@ import {
     OPEN_EDIT_MODAL,
     CLOSE_EDIT_MODAL,
     UPDATE_NOTE,
+    REMOVE_NOTE,
+    
+    PIN_NOTE,
+    UNPIN_NOTE
 } from './actions';
 
 export const sidebarInitialState = {
@@ -105,6 +109,31 @@ export function notesReducer(state=noteInitialState, action) {
                     notes,
                 }
             }
+        case REMOVE_NOTE:
+            // const newNotes = state.notes.filter((note) => note.id !== action.payload.id);
+            let pinnedNote = {};
+            const newNotes = [];
+            state.notes.forEach((note) => {
+                if (note.id === action.payload.id) {
+                    pinnedNote = {
+                        ...note,
+                        isPinned: true
+                    }
+                } else{
+                    newNotes.push(note);
+                }
+            });
+
+            console.log(pinnedNote)
+            console.log(newNotes);
+            return {
+                ...state,
+                notes: newNotes,
+                pinnedNotes: [
+                    pinnedNote,
+                    ...state.pinnedNotes
+                ]
+            }
         case GET_PINNED_NOTES:
             const pinnedNotes = action.pinnedNotes;
             return {
@@ -118,6 +147,14 @@ export function notesReducer(state=noteInitialState, action) {
                     ...state,
                     notes 
                 };
+
+        case PIN_NOTE:
+            console.log(action.payload);
+            return {
+                ...state,
+                notes: action.payload.notes,
+                pinnedNotes: action.payload.pinnedNotes
+            }
         default:
             return state
     }
